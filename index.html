@@ -1,218 +1,229 @@
 ﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Acertando Nossa História</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: url('imagem-fundo.png') no-repeat center center fixed;
-            background-size: cover;
-            margin: 0;
-            padding: 0;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acertando Nossa História</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2048&q=80') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+    }
 
-        .container {
-            background-color: rgba(255, 255, 255, 0.9);
-            max-width: 600px;
-            margin: 3rem auto;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
+    .container {
+      background-color: rgba(255, 255, 255, 0.92);
+      max-width: 640px;
+      margin: 4vh auto;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
 
-        h1 {
-            font-family: 'Georgia', serif;
-            font-size: 2.5rem;
-            text-align: center;
-            color: #000;
-            margin-bottom: 1rem;
-        }
+    h1 {
+      font-family: 'Georgia', serif;
+      font-size: 2.4rem;
+      text-align: center;
+      color: #000;
+      margin-bottom: 1.5rem;
+    }
 
-        .question {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: #444;
-        }
+    .question {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
 
-        .feedback {
-            color: #d50000;
-            font-weight: bold;
-            margin-top: 0.5rem;
-        }
+    .feedback {
+      color: #d50000;
+      font-weight: bold;
+      margin-top: 0.75rem;
+    }
 
-        input[type="text"] {
-            width: 100%;
-            padding: 0.8rem;
-            font-size: 1rem;
-            margin-top: 0.5rem;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
+    input[type="text"] {
+      width: 100%;
+      padding: 0.8rem;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
 
-        button {
-            margin-top: 1rem;
-            padding: 0.8rem 1.5rem;
-            background-color: #000;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s;
-        }
+    button {
+      margin-top: 1rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #000;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s;
+    }
 
-        button:hover:not(:disabled) {
-            background-color: #333;
-        }
+    button:hover:not(:disabled) {
+      background-color: #333;
+    }
 
-        button:disabled {
-            background-color: #aaa;
-            cursor: not-allowed;
-        }
+    button:disabled {
+      background-color: #aaa;
+      cursor: not-allowed;
+    }
 
-        #pause-box, #present {
-            display: none;
-            text-align: center;
-        }
+    #pause-box, #present {
+      display: none;
+      text-align: center;
+    }
 
-        #present img {
-            max-width: 100%;
-            border-radius: 15px;
-            margin-top: 1rem;
-        }
-    </style>
+    #present img {
+      max-width: 100%;
+      border-radius: 15px;
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        margin: 2vh 1rem;
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Acertando nossa história</h1>
+  <div class="container">
+    <h1>Acertando nossa história</h1>
 
-        <div id="quiz-box">
-            <p id="question" class="question"></p>
-            <input type="text" id="answer" placeholder="Digite sua resposta...">
-            <button id="submit-btn" onclick="checkAnswer()">Responder</button>
-            <p class="feedback" id="feedback"></p>
-        </div>
-
-        <div id="pause-box">
-            <p class="question">Então vamos ao quiz do nosso namoro 💞</p>
-            <button onclick="continuarQuiz()">Começar Quiz</button>
-        </div>
-
-        <div id="present">
-            <h2>Seu presente sou eu!</h2>
-            <img src="imagem-surpresa.png" alt="Presente especial">
-        </div>
+    <div id="quiz-box">
+      <p id="question" class="question"></p>
+      <input type="text" id="answer" placeholder="Digite sua resposta..." />
+      <button id="submit-btn" onclick="checkAnswer()">Responder</button>
+      <p class="feedback" id="feedback"></p>
     </div>
 
-    <script>
-        const perguntas = [
-            { pergunta: "Você quer ganhar seu presente?", resposta: "sim" },
-            { pergunta: "Quer muito saber qual é o seu presente?", resposta: "sim" },
-            { pergunta: "Qual foi a data que começamos a conversar?", resposta: "23/03/2023" },
-            { pergunta: "Qual foi a data do nosso primeiro beijo?", resposta: "15/04/2023" },
-            { pergunta: "Qual foi o primeiro filme que vimos no cinema juntos?", resposta: "velozes e furiosos 10" },
-            { pergunta: "Quem disse te amo primeiro?", resposta: "eu" },
-            { pergunta: "Qual foi o lugar da nossa primeira viagem a sós?", resposta: "juquitiba" },
-            { pergunta: "Qual foi nosso primeiro lego montado?", resposta: "iara" },
-            { pergunta: "Qual foi o primeiro presente que te dei?", resposta: "você mesmo" },
-            { pergunta: "Qual foi o primeiro presente que você me deu?", resposta: "camiseta" },
-            { pergunta: "Acho que depois de passar nesse teste eu posso finalmente revelar seu presente. Está pronto?", resposta: "sim" },
-            { pergunta: "Está realmente pronto?", resposta: "não", final: true }
-        ];
+    <div id="pause-box">
+      <p class="question">Então vamos ao quiz do nosso namoro 💞</p>
+      <button onclick="continuarQuiz()">Começar Quiz</button>
+    </div>
 
-        let index = 0;
-        let errosSeguidos = 0;
+    <div id="present">
+      <h2>Seu presente chegou sou EU pra vida inteira!</h2>
+      <img src="imagem-surpresa.png" alt="Presente especial" />
+    </div>
+  </div>
 
-        const questionEl = document.getElementById('question');
-        const answerEl = document.getElementById('answer');
-        const feedbackEl = document.getElementById('feedback');
-        const btn = document.getElementById('submit-btn');
-        const quizBox = document.getElementById('quiz-box');
-        const pauseBox = document.getElementById('pause-box');
-        const presentEl = document.getElementById('present');
+  <script>
+    const perguntas = [
+      { pergunta: "Você quer ganhar seu presente?", resposta: "sim" },
+      { pergunta: "Quer muito saber qual é o seu presente?", resposta: "sim" },
+      { pergunta: "Qual foi a data que começamos a conversar?", resposta: "23/03/2023" },
+      { pergunta: "Qual foi a data do nosso primeiro beijo?", resposta: "15/04/2023" },
+      { pergunta: "Qual foi o primeiro filme que vimos no cinema juntos?", resposta: "velozes e furiosos 10" },
+      { pergunta: "Quem disse te amo primeiro?", resposta: "eu" },
+      { pergunta: "Qual foi o lugar da nossa primeira viagem a sós?", resposta: "juquitiba" },
+      { pergunta: "Qual foi nosso primeiro lego montado?", resposta: "iara" },
+      { pergunta: "Qual foi o primeiro presente que te dei?", resposta: "eu" },
+      { pergunta: "Qual foi o primeiro presente que você me deu?", resposta: "camiseta" },
+      { pergunta: "Acho que depois de passar nesse teste eu posso finalmente revelar seu presente. Está pronto?", resposta: "sim" },
+      { pergunta: "Está pronto?", resposta: "não", final: true }
+    ];
 
-        function normalizarTexto(texto) {
-            return texto.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    let index = 0;
+    let errosSeguidos = 0;
+
+    const questionEl = document.getElementById('question');
+    const answerEl = document.getElementById('answer');
+    const feedbackEl = document.getElementById('feedback');
+    const btn = document.getElementById('submit-btn');
+    const quizBox = document.getElementById('quiz-box');
+    const pauseBox = document.getElementById('pause-box');
+    const presentEl = document.getElementById('present');
+
+    function normalizarTexto(texto) {
+      return texto.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function mostrarPergunta() {
+      const perguntaAtual = perguntas[index];
+      questionEl.textContent = perguntaAtual.pergunta;
+      answerEl.value = '';
+      feedbackEl.textContent = '';
+      answerEl.disabled = false;
+      btn.disabled = false;
+      btn.textContent = "Responder";
+      answerEl.focus();
+    }
+
+    function checkAnswer() {
+      const respostaUsuario = normalizarTexto(answerEl.value);
+      const respostaCorreta = normalizarTexto(perguntas[index].resposta);
+
+      if (respostaUsuario === respostaCorreta) {
+        errosSeguidos = 0;
+        index++;
+        if (index === 2) {
+          quizBox.style.display = "none";
+          pauseBox.style.display = "block";
+          document.addEventListener("keydown", teclaEnterParaContinuar);
+          return;
         }
-
-        function mostrarPergunta() {
-            const perguntaAtual = perguntas[index];
-            questionEl.textContent = perguntaAtual.pergunta;
-            answerEl.value = '';
-            feedbackEl.textContent = '';
-            answerEl.disabled = false;
-            btn.disabled = false;
-            btn.textContent = "Responder";
-            answerEl.focus();
+        if (index < perguntas.length) {
+          mostrarPergunta();
         }
+      } else {
+        errosSeguidos++;
+        feedbackEl.textContent =
+          index < 2
+            ? "Coloca a resposta certa vai"
+            : errosSeguidos === 1
+              ? "Errou, tente de novo..."
+              : "Melhor você acertar na próxima se não teremos uma conversinha";
+      }
 
-        function checkAnswer() {
-            const respostaUsuario = normalizarTexto(answerEl.value);
-            const respostaCorreta = normalizarTexto(perguntas[index].resposta);
+      if (perguntas[index - 1]?.final && respostaUsuario === respostaCorreta) {
+        revelarPresente();
+      }
+    }
 
-            if (respostaUsuario === respostaCorreta) {
-                errosSeguidos = 0;
-                index++;
+    function continuarQuiz() {
+      pauseBox.style.display = "none";
+      quizBox.style.display = "block";
+      mostrarPergunta();
+      document.removeEventListener("keydown", teclaEnterParaContinuar);
+    }
 
-                if (index === 2) {
-                    quizBox.style.display = "none";
-                    pauseBox.style.display = "block";
-                    document.addEventListener("keydown", teclaEnterParaContinuar);
-                    return;
-                }
+    function teclaEnterParaContinuar(e) {
+      if (e.key === "Enter") {
+        continuarQuiz();
+      }
+    }
 
-                if (index < perguntas.length) {
-                    mostrarPergunta();
-                }
+    function revelarPresente() {
+      questionEl.textContent = "E é claro que é uma trollagem... Vou revelar seu presente agora!";
+      answerEl.style.display = 'none';
+      feedbackEl.textContent = "Pressione o botão para revelar...";
+      btn.textContent = "Revelar Presente";
+      btn.onclick = () => {
+        quizBox.style.display = 'none';
+        presentEl.style.display = 'block';
+      };
+    }
 
-                if (perguntas[index - 1]?.final && respostaUsuario === respostaCorreta) {
-                    revelarPresente();
-                }
-            } else {
-                errosSeguidos++;
-                if (index < 2) {
-                    feedbackEl.textContent = "Coloca a resposta certa vai";
-                } else {
-                    feedbackEl.textContent = errosSeguidos === 1
-                        ? "Errou, tente de novo..."
-                        : "Melhor você acertar na próxima se não teremos uma conversinha";
-                }
-            }
-        }
+    answerEl.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+        checkAnswer();
+      }
+    });
 
-        function continuarQuiz() {
-            pauseBox.style.display = "none";
-            quizBox.style.display = "block";
-            mostrarPergunta();
-            document.removeEventListener("keydown", teclaEnterParaContinuar);
-        }
-
-        function teclaEnterParaContinuar(e) {
-            if (e.key === "Enter") {
-                continuarQuiz();
-            }
-        }
-
-        function revelarPresente() {
-            questionEl.textContent = "E é craro que é uma trolagi... Vou revelar seu presente agora!";
-            answerEl.style.display = 'none';
-            feedbackEl.textContent = "Pressione o botão para revelar...";
-            btn.textContent = "Revelar Presente";
-            btn.onclick = () => {
-                quizBox.style.display = 'none';
-                presentEl.style.display = 'block';
-            };
-        }
-
-        answerEl.addEventListener("keydown", function (e) {
-            if (e.key === "Enter") {
-                checkAnswer();
-            }
-        });
-
-        mostrarPergunta();
-    </script>
+    mostrarPergunta();
+  </script>
 </body>
 </html>
